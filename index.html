@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Интерактивные уроки — Математика 3–5 класс</title>
+<meta name="description" content="Интерактивные уроки-курсы по математике для 3–5 класса: анимации, задания с подсказками, озвучка. Открываются прямо в Telegram.">
+<meta property="og:title" content="Интерактивные уроки — Математика 3–5 класс">
+<meta property="og:description" content="Интерактивные уроки-курсы: смотрите анимацию, решайте задания, получайте подсказки. Запуск прямо в Telegram.">
+<meta property="og:image" content="https://kurale.github.io/interactive-lessons/previews/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%234a90d9'/><text x='32' y='44' font-size='34' text-anchor='middle' fill='white' font-family='Arial' font-weight='bold'>У</text></svg>">
+<style>
+  :root{
+    --bg:#f0f4f9; --card:#ffffff; --text:#1c2733; --hint:#6b7a8c;
+    --accent:#4a90d9; --accent-soft:#e3eef9; --chip:#eef2f7;
+    --shadow:0 2px 10px rgba(28,39,51,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    font-size:16px; line-height:1.45;
+    padding:max(12px, env(safe-area-inset-top)) 14px calc(28px + env(safe-area-inset-bottom));
+    max-width:1080px; margin:0 auto;
+  }
+  header{padding:10px 2px 14px}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo-mark{
+    width:44px;height:44px;border-radius:12px;flex:none;
+    background:linear-gradient(135deg,#5aa2e0,#3b7cc0);
+    display:flex;align-items:center;justify-content:center;
+    color:#fff;font-weight:800;font-size:22px;
+  }
+  h1{font-size:22px;font-weight:800;letter-spacing:-.3px}
+  .sub{color:var(--hint);font-size:14px;margin-top:2px}
+  .hero-note{
+    margin-top:12px;background:var(--accent-soft);border-radius:14px;
+    padding:10px 14px;font-size:14px;color:var(--text);
+    display:flex;gap:9px;align-items:flex-start;
+  }
+  .hero-note b{font-weight:700}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;padding:6px 2px 18px}
+  .chip{
+    border:1.5px solid var(--chip);background:var(--card);color:var(--text);
+    border-radius:999px;padding:7px 14px;font-size:14px;font-weight:600;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+  .sep{width:1px;background:var(--chip);margin:2px 4px}
+  .divider-label{font-size:13px;font-weight:700;color:var(--hint);text-transform:uppercase;letter-spacing:.6px;padding:14px 2px 10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .card{
+    background:var(--card);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .card:active{transform:scale(.98)}
+  @media(hover:hover){.card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(28,39,51,.13)}}
+  .card img{width:100%;aspect-ratio:2/1;object-fit:cover;display:block;background:var(--accent-soft)}
+  .card-body{padding:13px 14px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .card-title{font-size:16.5px;font-weight:700;letter-spacing:-.2px}
+  .card-desc{font-size:13.5px;color:var(--hint);flex:1}
+  .card-meta{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-size:12px;font-weight:600;background:var(--chip);color:var(--text);border-radius:8px;padding:3px 8px}
+  .tag.grade{background:var(--accent-soft);color:#2b6cb0}
+  .card-open{
+    margin-top:2px;align-self:flex-start;
+    font-size:14px;font-weight:700;color:var(--accent);
+    display:inline-flex;align-items:center;gap:5px;
+  }
+  footer{margin-top:26px;text-align:center;color:var(--hint);font-size:13px;padding:0 10px}
+  .empty{padding:30px 10px;text-align:center;color:var(--hint);display:none}
+  noscript ul{padding:0 2px;list-style:none;display:grid;gap:8px}
+  noscript a{color:var(--accent);font-weight:600}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <div class="logo-mark">У</div>
+    <div>
+      <h1>Интерактивные уроки</h1>
+      <div class="sub">Математика · 3–5 класс</div>
+    </div>
+  </div>
+  <div class="hero-note">🎯 <span><b>Как заниматься:</b> нажмите на урок — он откроется прямо здесь. Смотрите, считайте, отвечайте. Ошибка — не штраф, а подсказка: можно вернуться и посмотреть ещё раз.</span></div>
+</header>
+
+<div class="filters" id="filters" role="group" aria-label="Фильтры уроков"></div>
+<div id="content"></div>
+<div class="empty" id="empty">По этим фильтрам уроков нет — сбросьте фильтры 🙂</div>
+
+<footer>
+  Уроки работают прямо в браузере · прогресс сохраняется на устройстве<br>
+  Ещё материалы: <span style="color:var(--accent)">kurale.github.io</span>
+</footer>
+
+<noscript>
+  <ul>
+    <li><a href="lessons/tablitsa-ploshchadej.html">Таблица площадей (3–4 класс)</a></li>
+    <li><a href="lessons/kroliki-i-fazany.html">Кролики и фазаны (3–4 класс)</a></li>
+    <li><a href="lessons/prostye-nod-nok.html">Простые числа, НОД и НОК (5 класс)</a></li>
+  </ul>
+</noscript>
+
+<script>
+/* ===== Данные уроков — добавляйте новые сюда ===== */
+const LESSONS = [
+  {
+    slug: "tablitsa-ploshchadej",
+    title: "Таблица площадей",
+    desc: "Выводим 1 дм² = 100 см² и 1 см² = 100 мм² из картинок и анимаций: считаем клеточки, смотрим в лупу, выбираем фигуры.",
+    topic: "Математика",
+    grades: [3, 4],
+    slides: 11,
+    preview: "previews/tablitsa-ploshchadej.jpg",
+    url: "lessons/tablitsa-ploshchadej.html"
+  },
+  {
+    slug: "kroliki-i-fazany",
+    title: "Кролики и фазаны",
+    desc: "Классическая задача на смекалку: 36 голов и 100 ног. Считаем ноги, «меняем» фазанов на кроликов и выводим способ решения.",
+    topic: "Математика",
+    grades: [3, 4],
+    slides: 15,
+    preview: "previews/kroliki-i-fazany.jpg",
+    url: "lessons/kroliki-i-fazany.html"
+  },
+  {
+    slug: "prostye-nod-nok",
+    title: "Простые числа, НОД и НОК",
+    desc: "Практикум: применяем разложение на множители, НОД и НОК к живым задачам — грядки, букеты, орбиты планет.",
+    topic: "Математика",
+    grades: [5],
+    slides: 10,
+    preview: "previews/prostye-nod-nok.jpg",
+    url: "lessons/prostye-nod-nok.html"
+  }
+];
+
+/* ===== Telegram Web App ===== */
+const tg = window.Telegram && Telegram.WebApp;
+if (tg) {
+  tg.ready();
+  if (tg.expand) tg.expand();
+  if (tg.disableVerticalSwipes) tg.disableVerticalSwipes();
+}
+
+function applyTheme() {
+  if (!tg || !tg.themeParams) return;
+  const p = tg.themeParams, r = document.documentElement.style;
+  const set = (k, v) => { if (v) r.setProperty(k, v); };
+  set('--bg', p.bg_color);
+  set('--card', p.secondary_bg_color);
+  set('--text', p.text_color);
+  set('--hint', p.hint_color);
+  set('--accent', p.link_color || p.button_color);
+  if (tg.colorScheme === 'dark') set('--accent-soft', 'rgba(255,255,255,.10)');
+  if (tg.colorScheme === 'dark') set('--chip', 'rgba(255,255,255,.10)');
+}
+applyTheme();
+if (tg && tg.onEvent) tg.onEvent('themeChanged', applyTheme);
+
+function openLesson(url) {
+  const abs = new URL(url, location.href).href;
+  if (tg && tg.openLink) tg.openLink(abs);
+  else window.open(abs, '_blank', 'noopener');
+}
+
+/* ===== Фильтры: классы + темы ===== */
+const state = { grade: 'all', topic: 'all' };
+const grades = [...new Set(LESSONS.flatMap(l => l.grades))].sort();
+const topics = [...new Set(LESSONS.map(l => l.topic))];
+
+function renderFilters() {
+  const el = document.getElementById('filters');
+  const btn = (key, val, label) =>
+    `<button class="chip" data-k="${key}" data-v="${val}" aria-pressed="${state[key] === val}">${label}</button>`;
+  el.innerHTML =
+    btn('grade', 'all', 'Все классы') +
+    grades.map(g => btn('grade', g, g + ' класс')).join('') +
+    '<span class="sep"></span>' +
+    btn('topic', 'all', 'Все темы') +
+    topics.map(t => btn('topic', t, t)).join('');
+  el.querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => {
+    state[b.dataset.k] = b.dataset.v;
+    renderFilters();
+    renderLessons();
+  }));
+}
+
+function lessonCard(l) {
+  const el = document.createElement('article');
+  // innerHTML здесь безопасен: l — статические данные из константы LESSONS этого же файла,
+  // пользовательский ввод в разметку не попадает (фильтры идут через dataset/aria-pressed).
+  el.className = 'card';
+  el.setAttribute('role', 'link');
+  el.setAttribute('tabindex', '0');
+  el.innerHTML =
+    `<img src="${l.preview}" alt="Превью урока «${l.title}»" loading="lazy">` +
+    `<div class="card-body">
+       <div class="card-title">${l.title}</div>
+       <div class="card-desc">${l.desc}</div>
+       <div class="card-meta">
+         <span class="tag grade">${l.grades.length > 1 ? l.grades[0] + '–' + l.grades[1] : l.grades[0]} класс</span>
+         <span class="tag">${l.topic}</span>
+         <span class="tag">${l.slides} слайдов</span>
+       </div>
+       <span class="card-open">Открыть урок →</span>
+     </div>`;
+  const go = () => openLesson(l.url);
+  el.addEventListener('click', go);
+  el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+  return el;
+}
+
+function renderLessons() {
+  const root = document.getElementById('content');
+  root.innerHTML = '';
+  let shown = 0;
+  for (const topic of topics) {
+    const list = LESSONS.filter(l =>
+      l.topic === topic &&
+      (state.topic === 'all' || state.topic === topic) &&
+      (state.grade === 'all' || l.grades.includes(+state.grade)));
+    if (!list.length) continue;
+    shown += list.length;
+    const section = document.createElement('section');
+    section.innerHTML = `<div class="divider-label">${topic}</div>`;
+    const grid = document.createElement('div');
+    grid.className = 'grid';
+    list.forEach(l => grid.appendChild(lessonCard(l)));
+    section.appendChild(grid);
+    root.appendChild(section);
+  }
+  document.getElementById('empty').style.display = shown ? 'none' : 'block';
+}
+
+renderFilters();
+renderLessons();
+</script>
+</body>
+</html>
