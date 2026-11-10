@@ -25,7 +25,9 @@ tools/deploy.sh     — коммит + пуш (деплой GitHub Pages)
 1. Соберите урок в RedactorVideoInteractiv: `node lessons/<урок>/build-lesson.mjs`.
 2. Скопируйте `build/<урок>.html` в `lessons/`.
 3. Сгенерируйте превью: `python tools/build-previews.py` (или положите своё
-   изображение 560px шириной в `previews/<slug>.jpg`).
+   изображение 560px шириной в `previews/<slug>.jpg`). Превью берётся из
+   `content/images/01-title.png` урока; скрипт обходит все `build/*.html`, поэтому
+   лишние (альтернативные) сборки дают лишние `previews/*.jpg` — их надо удалить.
 4. Добавьте запись в массив `LESSONS` в `index.html` (slug, название,
    описание, классы, число слайдов).
 5. `bash tools/deploy.sh "новый урок <название>"` — сайт обновится через
