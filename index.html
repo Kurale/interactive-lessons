@@ -107,6 +107,7 @@
     <li><a href="lessons/prostye-nod-nok.html">Простые числа, НОД и НОК (5 класс)</a></li>
     <li><a href="lessons/priznaki-delimosti.html">Признаки делимости (5 класс)</a></li>
     <li><a href="lessons/kak-reshat-zadachu.html">Как решать задачу (5 класс)</a></li>
+    <li><a href="lessons/shurupy-60.html">Задача про шурупы (2–4 класс)</a></li>
   </ul>
 </noscript>
 
@@ -172,6 +173,16 @@ const LESSONS = [
     slides: 18,
     preview: "previews/kak-reshat-zadachu.jpg",
     url: "lessons/kak-reshat-zadachu.html"
+  },
+  {
+    slug: "shurupy-60",
+    title: "Задача про шурупы",
+    desc: "Видео-разбор задачи на уравнивание: 60 шурупов в двух коробках, в одной на 12 больше. Видео само останавливается и спрашивает — считай вместе с ним и реши похожую задачу сам.",
+    topic: "Математика",
+    grades: [2, 3, 4],
+    slides: 6,
+    preview: "previews/shurupy-60.jpg",
+    url: "lessons/shurupy-60.html"
   }
 ];
 
@@ -239,7 +250,7 @@ function lessonCard(l) {
        <div class="card-title">${l.title}</div>
        <div class="card-desc">${l.desc}</div>
        <div class="card-meta">
-         <span class="tag grade">${l.grades.length > 1 ? l.grades[0] + '–' + l.grades[1] : l.grades[0]} класс</span>
+         <span class="tag grade">${l.grades.length > 1 ? l.grades[0] + '–' + l.grades[l.grades.length - 1] : l.grades[0]} класс</span>
          <span class="tag">${l.topic}</span>
          <span class="tag">${l.slides} слайдов</span>
        </div>
