@@ -1,0 +1,98 @@
+<!doctype html>
+<!-- Test harness: same app, but Telegram.WebApp is replaced by a stub with
+     spies so the integration paths (ready/expand/theme/haptics/BackButton/
+     CloudStorage/safe-area) can be verified outside Telegram. -->
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>STUB: Математика для малышей</title>
+  <script>
+    // ---- Telegram.WebApp stub (installed before app scripts) ----
+    window.__tg = { calls: [], events: {} };
+    (function () {
+      const calls = window.__tg.calls;
+      window.Telegram = { WebApp: {
+        ready: () => calls.push('ready'),
+        expand: () => calls.push('expand'),
+        disableVerticalSwipes: () => calls.push('disableVerticalSwipes'),
+        requestFullscreen: () => calls.push('requestFullscreen'),
+        setHeaderColor: (c) => calls.push('setHeaderColor:' + c),
+        HapticFeedback: {
+          notificationOccurred: (t) => calls.push('haptic:' + t),
+          selectionChanged: () => calls.push('haptic:selection'),
+          impactOccurred: (s) => calls.push('haptic:impact:' + s),
+        },
+        BackButton: {
+          show: () => calls.push('back.show'),
+          hide: () => calls.push('back.hide'),
+          onClick: () => {},
+        },
+        onEvent: (ev, cb) => {
+          (window.__tg.events[ev] = window.__tg.events[ev] || []).push(cb);
+          calls.push('onEvent:' + ev);
+        },
+        CloudStorage: {
+          getItem: (k, cb) => { calls.push('cs.getItem'); cb(null, JSON.stringify({
+            topics: { topic02: { bestStars: 2, completed: true } }, totalStars: 2 })); },
+          setItem: (k, v) => { calls.push('cs.setItem:' + v); },
+        },
+        viewportStableHeight: 800,
+        contentSafeAreaInset: { top: 55, bottom: 34 },
+        themeParams: { bg_color: '#182533', text_color: '#ffffff', button_color: '#2ea6ff' },
+      } };
+    })();
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <section id="screen-topics" class="screen">
+      <header class="topics-head safe-top">
+        <h1>Математика 🚀</h1>
+        <div class="stars-badge">⭐ <span id="total-stars">0</span></div>
+      </header>
+      <p class="topics-sub">Смотри видео и отвечай на вопросы!</p>
+      <ul id="topic-list" class="topic-list"></ul>
+    </section>
+    <section id="screen-player" class="screen hidden">
+      <div class="video-stage">
+        <video id="video" playsinline webkit-playsinline preload="auto"></video>
+        <div id="loading" class="loading hidden"><div class="spinner"></div></div>
+        <div id="tap-play" class="tap-play hidden">
+          <button id="btn-tap-play" type="button" aria-label="Смотреть">▶ Смотреть</button>
+        </div>
+        <header class="player-head safe-top">
+          <button id="btn-back" class="icon-btn" type="button" aria-label="Назад">←</button>
+          <div id="player-title" class="player-title"></div>
+          <div id="player-stars" class="player-stars">⭐ 0/0</div>
+        </header>
+        <div class="progress-track"><div id="progress-bar"></div></div>
+        <div id="quiz" class="quiz hidden">
+          <div id="quiz-halo" class="quiz-halo"></div>
+          <div class="quiz-card">
+            <div id="quiz-progress" class="quiz-progress"></div>
+            <h2 id="quiz-question"></h2>
+            <div id="quiz-options" class="quiz-options"></div>
+            <div id="quiz-hint" class="quiz-hint hidden"></div>
+            <button id="btn-continue" class="btn-continue hidden" type="button">Продолжить ▶</button>
+          </div>
+        </div>
+        <div id="done" class="done hidden">
+          <div class="done-card">
+            <div class="done-emoji">🎉</div>
+            <h2>Тема пройдена!</h2>
+            <div id="done-stars" class="done-stars"></div>
+            <div id="done-best" class="done-best"></div>
+            <button id="btn-replay" class="btn-continue" type="button">Смотреть ещё раз 🔁</button>
+            <button id="btn-totopics" class="btn-secondary" type="button">Все темы</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="error-banner" class="error-banner hidden"></div>
+  </div>
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

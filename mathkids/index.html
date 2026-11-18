@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="color-scheme" content="light dark">
+  <title>Математика для малышей</title>
+  <!-- Telegram Mini App SDK (must load before app.js) -->
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- ===== TOPICS SCREEN ===== -->
+    <section id="screen-topics" class="screen">
+      <header class="topics-head safe-top">
+        <h1>Математика 🚀</h1>
+        <div class="stars-badge">⭐ <span id="total-stars">0</span></div>
+      </header>
+      <p class="topics-sub">Смотри видео и отвечай на вопросы!</p>
+      <ul id="topic-list" class="topic-list"></ul>
+    </section>
+
+    <!-- ===== PLAYER SCREEN ===== -->
+    <section id="screen-player" class="screen hidden">
+      <div class="video-stage">
+        <video id="video" playsinline webkit-playsinline preload="auto"></video>
+
+        <div id="loading" class="loading hidden"><div class="spinner"></div></div>
+
+        <div id="tap-play" class="tap-play hidden">
+          <button id="btn-tap-play" type="button" aria-label="Смотреть">▶ Смотреть</button>
+        </div>
+
+        <header class="player-head safe-top">
+          <button id="btn-back" class="icon-btn" type="button" aria-label="Назад">←</button>
+          <div id="player-title" class="player-title"></div>
+          <div id="player-stars" class="player-stars">⭐ 0/0</div>
+        </header>
+
+        <div class="progress-track"><div id="progress-bar"></div></div>
+
+        <!-- QUIZ OVERLAY -->
+        <div id="quiz" class="quiz hidden">
+          <div id="quiz-halo" class="quiz-halo"></div>
+          <div class="quiz-card">
+            <div id="quiz-progress" class="quiz-progress"></div>
+            <h2 id="quiz-question"></h2>
+            <div id="quiz-options" class="quiz-options"></div>
+            <div id="quiz-hint" class="quiz-hint hidden"></div>
+            <button id="btn-continue" class="btn-continue hidden" type="button">Продолжить ▶</button>
+          </div>
+        </div>
+
+        <!-- TOPIC COMPLETED OVERLAY -->
+        <div id="done" class="done hidden">
+          <div class="done-card">
+            <div class="done-emoji">🎉</div>
+            <h2>Тема пройдена!</h2>
+            <div id="done-stars" class="done-stars"></div>
+            <div id="done-best" class="done-best"></div>
+            <button id="btn-replay" class="btn-continue" type="button">Смотреть ещё раз 🔁</button>
+            <button id="btn-totopics" class="btn-secondary" type="button">Все темы</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="error-banner" class="error-banner hidden"></div>
+  </div>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
