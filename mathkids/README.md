@@ -72,13 +72,34 @@ make_demo_assets.sh — генератор демо-видео (ffmpeg)
   при старте значения объединяются по максимуму.
 - **BackButton**: в плеере включается кнопка «назад» Telegram; закрывает плеер.
 
-## Публикация (для интеграции)
+## Публикация
 
-1. Хостинг: любой статический **HTTPS** (GitHub Pages, Netlify, nginx + LE).
-   Требования сервера: `video/mp4` MIME, CORS не нужен при same-origin, HTTP Range
-   обязателен (для перемотки; по умолчанию включён почти везде).
-2. BotFather: `/newapp` → выбрать бота → указать URL, либо `/setmenubutton`.
-3. Прогресс тем хранится у пользователя (localStorage/CloudStorage), сервер не нужен.
+**Живой URL:** https://kurale.github.io/interactive-lessons/mathkids/
+
+Хостинг — GitHub Pages этого репозитория (ветка `main`, каталог `mathkids/`).
+Проверено на живом URL: `video/mp4` MIME, **HTTP Range 206** (перемотка),
+TTFB видео ~0.1 с, полный файл 2.7–3.8 МБ за 0.3–0.6 с.
+
+### Бот (BotFather)
+
+1. `@BotFather` → `/newbot` → имя и username бота → сохранить токен.
+2. `/setmenubutton` → выбрать бота → URL
+   `https://kurale.github.io/interactive-lessons/mathkids/` → текст кнопки
+   (например «Открыть уроки»). Либо `/mybots` → Bot Settings → Menu Button.
+3. Открыть бота → кнопка меню запускает Mini App.
+
+Без бота приложение тоже открывается: URL выше в мобильном браузере
+(Telegram API отключится автоматически, прогресс — в localStorage).
+
+Прогресс хранится у пользователя (localStorage + CloudStorage), сервер не нужен.
+
+### Обновление контента
+
+```bash
+python3 build_content.py --manifest ~/src/manim-vertical/out/batch1_manifest.json \
+                        --out ~/src/interactive-lessons/mathkids
+# + скопировать topicNN.mp4 в assets/ и сгенерировать постеры (ffmpeg -ss 2)
+```
 
 Замена контента: положить `topicNN.mp4` (1080x1920 из Manim) в `assets/`,
 обновить `content.js` — больше ничего менять не нужно.
